@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -191,7 +192,11 @@ fun SignUpScreen(
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
                     }
                 })
-            }, text = "Create account")
+            }, text = "Create account",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(78.dp)
+                    .padding(50.dp, 15.dp, 50.dp, 10.dp))
         }
     }
 }

@@ -15,4 +15,8 @@ class RepositoryAuth @Inject constructor(private val dataSource: DataSource) {
     fun login(email: String, password: String, listener: Listener){
         dataSource.login(email, password, listener)
     }
+
+    fun recoverPassword(email: String, listener: Listener){
+        dataSource.recoverPassword(email, listener)
+    }
 }

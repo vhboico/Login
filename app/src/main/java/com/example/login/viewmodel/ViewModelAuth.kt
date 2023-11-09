@@ -22,4 +22,10 @@ class ViewModelAuth @Inject constructor(private val repositoryAuth: RepositoryAu
             repositoryAuth.login(email, password, listener)
         }
     }
+
+    fun recoverPassword(email: String, listener: Listener){
+        viewModelScope.launch {
+            repositoryAuth.recoverPassword(email, listener)
+        }
+    }
 }

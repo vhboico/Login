@@ -27,6 +27,7 @@ class DataSource @Inject constructor() {
                         "email" to email,
                         "userid" to userID
                     )
+
                     db.collection("users").document(userID).set(map).addOnCompleteListener {
                         listener.onSuccess("Successful registration", "loginScreen")
                     }.addOnFailureListener {
@@ -36,6 +37,7 @@ class DataSource @Inject constructor() {
             }.addOnFailureListener {exception ->
                 val error = when(exception){
                     is FirebaseAuthUserCollisionException -> "This account has already been registered"
+//                    is FirebaseAuthInvalidCredentialsException -> ""
                     is FirebaseAuthWeakPasswordException -> "The password must contain at least 6 characters"
                     is FirebaseNetworkException -> "No internet connection"
                     else -> "Invalid email"
@@ -58,6 +60,26 @@ class DataSource @Inject constructor() {
                     is FirebaseAuthInvalidCredentialsException -> "Incorrect password"
                     is FirebaseNetworkException -> "No internet connection"
                     else -> "Invalid email"
+                }
+                listener.onFailure(error)
+            }
+        }
+    }
+
+    fun recoverPassword(email: String, listener: Listener){
+        if (email.isEmpty()){
+            listener.onFailure("Complete all fields")
+        }else {
+            auth.sendPasswordResetEmail(email).addOnCompleteListener {
+                if (it.isSuccessful){
+                    listener.onSuccess("Check your email", "loginScreen")
+                }
+            }.addOnFailureListener {exception ->
+                val error = when(exception){
+                    is FirebaseAuthUserCollisionException -> "This account has already been registered"
+                    is FirebaseAuthInvalidCredentialsException -> "Invalid email"
+                    is FirebaseNetworkException -> "No internet connection"
+                    else -> "Error"
                 }
                 listener.onFailure(error)
             }

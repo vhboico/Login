@@ -21,7 +21,7 @@ fun ListScreen(navController: NavController) {
                 backgroundColor = blue,
                 title = {
                     Text(
-                        text = "Soccer",
+                        text = "Welcome",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = white

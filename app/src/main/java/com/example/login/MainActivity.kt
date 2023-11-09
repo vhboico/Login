@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.login.view.ListScreen
 import com.example.login.view.LoginScreen
+import com.example.login.view.RecoverPassword
 import com.example.login.view.SignUpScreen
-import com.example.login.viewmodel.ViewModelAPI
 import com.example.login.viewmodel.ViewModelAuth
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,18 +21,20 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val navController = rememberNavController()
-            val viewModelAPI: ViewModelAPI = hiltViewModel()
             val viewModelAuth: ViewModelAuth = hiltViewModel()
 
             NavHost(navController = navController, startDestination = "loginScreen"){
                 composable("loginScreen"){
-                    LoginScreen(navController, viewModelAuth)
+                    LoginScreen(navController)
                 }
                 composable("signUpScreen"){
                     SignUpScreen(navController, viewModelAuth)
                 }
                 composable("listScreen"){
                     ListScreen(navController)
+                }
+                composable("recoverPassword"){
+                    RecoverPassword(navController, viewModelAuth)
                 }
             }
         }
